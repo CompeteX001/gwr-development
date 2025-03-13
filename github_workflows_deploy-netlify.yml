@@ -21,14 +21,14 @@ jobs:
       - name: Install Netlify CLI
         run: npm install netlify-cli -g
 
-      - name: Create Netlify Function
+      - name: Deploy Netlify Function
         run: |
-          netlify functions:create --name submit-form --template hello-world --directory netlify/functions
+          netlify deploy --prod --dir=public
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 
-      - name: Push function to repository
+      - name: Add Netlify function
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
